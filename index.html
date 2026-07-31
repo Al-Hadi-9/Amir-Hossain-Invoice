@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    
+    <!-- HTML2Canvas and jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    
+    <!-- QRCode Library - এই লাইনটি ঠিক করুন -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="controls-panel">
+        <div class="brand-block">
+          <div>
+            <p class="eyebrow"></p>
+            <h1></h1>
+          </div>
+        </div>
+
+        <div class="panel-card hero-card">
+          <div class="card-title-row">
+            <h2>Invoice Details</h2>
+          </div>
+          <div class="grid two-col">
+            <label>
+              Invoice No
+              <input id="invoiceNo" type="text" placeholder="INV-2026-01" />
+            </label>
+            <label>
+              Date & Time
+              <input id="invoiceDate" type="datetime-local" />
+            </label>
+          </div>
+          <div class="grid two-col">
+            <label>
+              Customer VAT Number
+              <input id="customerVat" type="text" placeholder="Customer VAT number" />
+            </label>
+            <label>
+              Company / Shop
+              <input id="companyName" type="text" placeholder="Company name" />
+            </label>
+          </div>
+        </div>
+
+        <div class="panel-card entry-card">
+          <div class="card-title-row">
+            <h2>Add Product</h2>
+          </div>
+          <div class="grid three-col">
+            <label>
+              Product Name
+              <input id="productName" type="text" placeholder="e.g. Service charge" />
+            </label>
+            <label>
+              Quantity
+              <input id="quantity" type="number" min="1" step="1" value="1" />
+            </label>
+            <label>
+              Price
+              <input id="price" type="number" min="0" step="0.01" placeholder="0.00" />
+            </label>
+          </div>
+          <div class="button-row">
+            <button id="addItemBtn" class="primary-btn" type="button">Add Item</button>
+            <button id="clearBtn" class="ghost-btn" type="button">Clear All</button>
+          </div>
+        </div>
+
+        <div class="panel-card summary-card" style="padding: 14px 20px;">
+          <div class="card-title-row" style="margin-bottom: 10px;">
+            <h2 style="font-size: 0.95rem;">Totals</h2>
+            <p class="muted"></p>
+          </div>
+          <div class="summary-grid" style="gap: 8px;">
+            <div style="padding: 10px 14px; font-size: 0.9rem; min-width: 50%;">
+              <span style="font-size: 0.85rem;">Subtotal</span>
+              <strong id="subtotalValue" style="font-size: 1rem;">S.R 0.00</strong>
+            </div>
+            <div style="padding: 10px 14px; font-size: 0.9rem; min-width: 50%;">
+              <span style="font-size: 0.85rem;">VAT (15%)</span>
+              <strong id="vatValue" style="font-size: 1rem;">S.R 0.00</strong>
+            </div>
+            <div class="total-box" style="padding: 10px 14px; font-size: 0.9rem; min-width: 50%;">
+              <span style="font-size: 0.85rem;">Total</span>
+              <strong id="totalValue" style="font-size: 1.1rem;">S.R 0.00</strong>
+            </div>
+          </div>
+          <div class="button-row bottom-gap" style="margin-top: 10px;">
+            <button id="savePdfBtn" class="primary-btn" type="button" style="padding: 10px 16px; font-size: 0.9rem;">Save PDF</button>
+            <button id="printBtn" class="ghost-btn" type="button" style="padding: 10px 16px; font-size: 0.9rem;">Print</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="preview-panel">
+        <article class="invoice-preview" id="invoicePreview">
+          <div class="device-watermark device-monitor" aria-hidden="true"></div>
+          
+          <div class="preview-header">
+            <div class="header-copy">
+              <h3 style="font-size: 1.2rem; margin: 0; color: #0a2f2d;">Shurooq Miser Al-Otaibi Est.</h3>
+              <p style="margin: 2px 0 0; font-size: 0.95rem; color: #0a2f2d;">For electronics</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Sales Maintenance Installation - Receivers</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Screen Repair and Camera Services</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Abi Jaafar Al-Mansour Street-Al-Yarmouk District</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Md.Hossain-0501967413-0533140383</p>
+            </div>
+            
+            <div class="header-arabic">
+              <p style="font-size: 1.3rem; font-weight: 700; margin: 0; color: #0a2f2d;">مؤسسة شروق مسفرالعتيبي</p>
+              <p style="font-size: 1rem; margin: 2px 0 0; color: #0a2f2d;">لإللكترونيات</p>
+              <p style="font-size: 0.95rem; margin: 2px 0 0; color: #0a2f2d;">بيع - صيانة - تركيب - رسيفرات تصليح شاشات</p>
+              <p style="font-size: 0.95rem; margin: 2px 0 0; color: #0a2f2d;">شارع ابي جعفر المنصور - حي اليرموك</p>
+              <p style="font-size: 0.95rem; margin: 2px 0 0; color: #0a2f2d;">٠٠٥١٩٧٤١٣ / محمد حسين</p>
+            </div>
+          </div>
+          
+          <div class="invoice-meta-full-width">
+            <div class="meta-box">
+              <span class="meta-label">CR Number</span>
+              <strong class="meta-value">7015820736</strong>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">VAT Number</span>
+              <strong class="meta-value">310418356300003</strong>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Invoice No</span>
+              <strong id="previewInvoiceNo" class="meta-value">INV-2026-01</strong>
+            </div>
+            <div class="meta-box">
+              <span class="meta-label">Date & Time</span>
+              <strong id="previewDate" class="meta-value" style="font-size: 0.72rem;">--</strong>
+            </div>
+          </div>
+          
+          <div id="customerInfoContainer" class="customer-info-row">
+            <p id="companyInfo" class="customer-info-item">
+              <span id="companyLabel" class="info-label">Company:</span>
+              <span id="companyNameDisplay"></span>
+            </p>
+            <p id="customerVatDisplay" class="customer-info-item">
+              <span class="info-label">Customer VAT:</span>
+              <span id="previewCustomerVat">--</span>
+            </p>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 30%; font-size: 0.8rem; padding: 8px 12px;">Product</th>
+                  <th style="width: 10%; font-size: 0.8rem; padding: 8px 12px;">Qty</th>
+                  <th style="width: 18%; font-size: 0.8rem; padding: 8px 12px;">Price</th>
+                  <th style="width: 18%; font-size: 0.8rem; padding: 8px 12px;">VAT</th>
+                  <th style="width: 27%; font-size: 0.8rem; padding: 8px 12px;">Total</th>
+                </tr>
+              </thead>
+              <tbody id="itemsBody">
+                <tr class="empty-row">
+                  <td colspan="5" style="padding: 26px 12px; font-size: 0.9rem; text-align: center;">No products added yet.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Footer: QR Code (Left) + Totals (Right) -->
+          <div class="invoice-footer">
+            <!-- QR Code - Left Side -->
+            <div class="qr-section">
+              <div id="qrCodeImage" style="width: 100px; height: 100px;"></div>
+              <p style="font-size: 0.65rem; color: #999; margin: 4px 0 0; text-align: center;">QR Code</p>
+            </div>
+            
+            <!-- Totals - Right Side -->
+            <div class="totals-section">
+              <table class="totals-table">
+                <tr>
+                  <td class="label">Subtotal</td>
+                  <td class="value" id="previewSubtotal">S.R 0.00</td>
+                </tr>
+                <tr>
+                  <td class="label">VAT (15%)</td>
+                  <td class="value" id="previewVat">S.R 0.00</td>
+                </tr>
+                <tr class="total-row">
+                  <td class="label">Total</td>
+                  <td class="value" id="previewTotal">S.R 0.00</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <script src="app.js" defer></script>
+  </body>
+</html>
