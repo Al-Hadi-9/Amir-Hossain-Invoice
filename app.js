@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   const authSessionKey = 'invoice-authenticated';
-  const loginCredentials = { username: '0501967413', password: 'Aa@123456' };
+  const loginCredentials = { username: '............', password: '......' };
 
   const authScreen    = document.getElementById('authScreen');
   const loginForm     = document.getElementById('loginForm');
