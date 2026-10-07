@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+<<<<<<< HEAD
 
     <!-- QRCode library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
@@ -37,6 +38,17 @@
       </form>
     </section>
 
+=======
+    
+    <!-- HTML2Canvas and jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+    
+    <!-- QRCode Library - এই লাইনটি ঠিক করুন -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  </head>
+  <body>
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
     <main class="app-shell">
       <section class="controls-panel">
         <div class="brand-block">
@@ -46,12 +58,16 @@
           </div>
         </div>
 
+<<<<<<< HEAD
         <button id="logoutBtn" class="logout-btn" type="button">Log out</button>
 
+=======
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
         <div class="panel-card hero-card">
           <div class="card-title-row">
             <h2>Invoice Details</h2>
           </div>
+<<<<<<< HEAD
           <div class="grid one-col">
             <label>
               Invoice Type
@@ -68,11 +84,23 @@
               Time
               <input id="invoiceTime" type="time" step="1" />
             </label>
+=======
+          <div class="grid two-col">
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
             <label>
               Invoice No
               <input id="invoiceNo" type="text" placeholder="INV-2026-01" />
             </label>
             <label>
+<<<<<<< HEAD
+=======
+              Date & Time
+              <input id="invoiceDate" type="datetime-local" />
+            </label>
+          </div>
+          <div class="grid two-col">
+            <label>
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
               Customer VAT Number
               <input id="customerVat" type="text" placeholder="Customer VAT number" />
             </label>
@@ -136,6 +164,7 @@
       <section class="preview-panel">
         <article class="invoice-preview" id="invoicePreview">
           <div class="device-watermark device-monitor" aria-hidden="true"></div>
+<<<<<<< HEAD
 
           <div class="preview-header">
             <div class="header-copy">
@@ -161,12 +190,38 @@
             </div>
           </div>
 
+=======
+          
+          <div class="preview-header">
+            <div class="header-copy">
+              <h3 style="font-size: 1.2rem; margin: 0; color: #0a2f2d;">Shurooq Miser Al-Otaibi Est.</h3>
+              <p style="margin: 2px 0 0; font-size: 0.95rem; color: #0a2f2d;">For electronics</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Sales Maintenance Installation - Receivers</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Screen Repair and Camera Services</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Abi Jaafar Al-Mansour Street-Al-Yarmouk District</p>
+              <p style="margin: 2px 0 0; font-size: 0.9rem; color: #0a2f2d;">Md.Hossain-0501967413-0533140383</p>
+            </div>
+            
+            <div class="header-arabic">
+              <p style="font-size: 1.3rem; font-weight: 700; margin: 0; color: #0a2f2d;">مؤسسة شروق مسفرالعتيبي</p>
+              <p style="font-size: 1rem; margin: 2px 0 0; color: #0a2f2d;">لإللكترونيات</p>
+              <p style="font-size: 0.95rem; margin: 2px 0 0; color: #0a2f2d;">بيع - صيانة - تركيب - رسيفرات تصليح شاشات</p>
+              <p style="font-size: 0.95rem; margin: 2px 0 0; color: #0a2f2d;">شارع ابي جعفر المنصور - حي اليرموك</p>
+              <p style="font-size: 0.95rem; margin: 2px 0 0; color: #0a2f2d;">٠٠٥١٩٧٤١٣ / محمد حسين</p>
+            </div>
+          </div>
+          
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
           <div class="invoice-meta-full-width">
             <div class="meta-box">
               <span class="meta-label">CR Number</span>
               <strong class="meta-value">7015820736</strong>
             </div>
+<<<<<<< HEAD
             <div class="meta-box" id="vatNumberBox">
+=======
+            <div class="meta-box">
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
               <span class="meta-label">VAT Number</span>
               <strong class="meta-value">310418356300003</strong>
             </div>
@@ -175,11 +230,19 @@
               <strong id="previewInvoiceNo" class="meta-value">INV-2026-01</strong>
             </div>
             <div class="meta-box">
+<<<<<<< HEAD
               <span class="meta-label">Date &amp; Time</span>
               <strong id="previewDate" class="meta-value" style="font-size: 0.72rem;">--</strong>
             </div>
           </div>
 
+=======
+              <span class="meta-label">Date & Time</span>
+              <strong id="previewDate" class="meta-value" style="font-size: 0.72rem;">--</strong>
+            </div>
+          </div>
+          
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
           <div id="customerInfoContainer" class="customer-info-row">
             <p id="companyInfo" class="customer-info-item">
               <span id="companyLabel" class="info-label">Company:</span>
@@ -210,6 +273,7 @@
             </table>
           </div>
 
+<<<<<<< HEAD
           <!-- Footer: Invoice Details QR (Left) + Totals (Right) -->
           <div class="invoice-footer">
             <div class="qr-section" id="qrSection">
@@ -217,6 +281,17 @@
               <p style="font-size: 0.6rem; color: #666; margin: 4px 0 0; text-align: center; line-height: 1.2;">Invoice Details</p>
             </div>
 
+=======
+          <!-- Footer: QR Code (Left) + Totals (Right) -->
+          <div class="invoice-footer">
+            <!-- QR Code - Left Side -->
+            <div class="qr-section">
+              <div id="qrCodeImage" style="width: 100px; height: 100px;"></div>
+              <p style="font-size: 0.65rem; color: #999; margin: 4px 0 0; text-align: center;">QR Code</p>
+            </div>
+            
+            <!-- Totals - Right Side -->
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
             <div class="totals-section">
               <table class="totals-table">
                 <tr>
@@ -234,6 +309,7 @@
               </table>
             </div>
           </div>
+<<<<<<< HEAD
 
           <!-- Location bar (in-flow) -->
           <div class="location-bar">
@@ -245,6 +321,8 @@
               </div>
             </div>
           </div>
+=======
+>>>>>>> 23b75b99d09bbc83297de9d24024dc1e42ff76b4
         </article>
       </section>
     </main>
